@@ -68,7 +68,7 @@ restateA: aNaturalNumber
 	^(aNaturalNumber previous )! !
 
 
-!I class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!I class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -158,7 +158,7 @@ restateA: aNaturalNumber
 	^(aNaturalNumber previous - self previous)! !
 
 
-!II class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!II class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -179,7 +179,7 @@ II subclass: #III
 III class
 	instanceVariableNames: ''!
 
-!III class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!III class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -200,7 +200,7 @@ II subclass: #IIII
 IIII class
 	instanceVariableNames: ''!
 
-!IIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!IIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -221,7 +221,7 @@ II subclass: #IIIII
 IIIII class
 	instanceVariableNames: ''!
 
-!IIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!IIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -242,7 +242,7 @@ II subclass: #IIIIII
 IIIIII class
 	instanceVariableNames: ''!
 
-!IIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!IIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -263,7 +263,7 @@ II subclass: #IIIIIII
 IIIIIII class
 	instanceVariableNames: ''!
 
-!IIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!IIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -284,7 +284,7 @@ II subclass: #IIIIIIII
 IIIIIIII class
 	instanceVariableNames: ''!
 
-!IIIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 23:42:00'!
+!IIIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/31/2023 19:09:21'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -305,14 +305,13 @@ DenotativeObject subclass: #conversor
 conversor class
 	instanceVariableNames: ''!
 
-!conversor class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 20:48:44'!
+!conversor class methodsFor: 'as yet unclassified' stamp: 'psm 8/31/2023 19:09:00'!
 pasarEnteroANatural: aPositiveNumber
 	(aPositiveNumber > 0)
 	ifTrue: [
-	|natural contador|.
+	|natural |.
 	natural  := I.
-	contador := aPositiveNumber  .
-	[contador > 1] whileTrue: [natural := natural next. contador := contador -1.].
+	(aPositiveNumber - 1) timesRepeat: [natural := natural next.].
 	^natural .
 	]. 
 	self error: 'tiene que ser positivo'
