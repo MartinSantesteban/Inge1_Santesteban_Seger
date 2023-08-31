@@ -19,9 +19,9 @@ I class
 + aNaturalNumber
 	^aNaturalNumber next! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 20:59:27'!
+!I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 21:43:23'!
 - aNaturalNumber
-	self previous! !
+	^self error: 'descripcionDeErrorDeNumerosNegativosNoSoportados'! !
 
 !I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 21:13:40'!
 / aNaturalNumber
@@ -51,16 +51,16 @@ next
 	next previous: self.
 	^next! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 21:17:23'!
+!I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 21:42:54'!
 previous
-	self error: self name , ' descripcionDeErrorDeNumerosNegativosNoSoportados'! !
+	self error: 'descripcionDeErrorDeNumerosNegativosNoSoportados'! !
 
 !I class methodsFor: 'as yet unclassified' stamp: 'psm 8/30/2023 20:47:00'!
 restateA: aNaturalNumber
 	^(aNaturalNumber previous )! !
 
 
-!I class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:03'!
+!I class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -146,7 +146,7 @@ restateA: aNaturalNumber
 	^(aNaturalNumber previous - self previous)! !
 
 
-!II class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:03'!
+!II class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -167,7 +167,7 @@ II subclass: #III
 III class
 	instanceVariableNames: ''!
 
-!III class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:03'!
+!III class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -188,7 +188,7 @@ II subclass: #IIII
 IIII class
 	instanceVariableNames: ''!
 
-!IIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:04'!
+!IIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -209,7 +209,7 @@ II subclass: #IIIII
 IIIII class
 	instanceVariableNames: ''!
 
-!IIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:04'!
+!IIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -230,7 +230,7 @@ II subclass: #IIIIII
 IIIIII class
 	instanceVariableNames: ''!
 
-!IIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:04'!
+!IIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -251,7 +251,7 @@ II subclass: #IIIIIII
 IIIIIII class
 	instanceVariableNames: ''!
 
-!IIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:04'!
+!IIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
@@ -272,7 +272,7 @@ II subclass: #IIIIIIII
 IIIIIIII class
 	instanceVariableNames: ''!
 
-!IIIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:30:04'!
+!IIIIIIII class methodsFor: '--** private fileout/in **--' stamp: 'psm 8/30/2023 21:43:36'!
 initializeCollaboratorsFromFile
 	"Auto generated method for loading purposes - Do not modify it"
 
