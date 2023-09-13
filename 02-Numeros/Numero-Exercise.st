@@ -583,8 +583,8 @@ Entero subclass: #EnteroPositivo
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:00:32'!
-dividiteACoprimoPositivo: numerator
+!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:52:48'!
+dividiteACoprimo: numerator
 
 	|fraccionDeLaDivisionCoprima|
 	
@@ -592,7 +592,7 @@ dividiteACoprimoPositivo: numerator
 	
 	^fraccionDeLaDivisionCoprima initializeWith: numerator over: self! !
 
-!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:35:54'!
+!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:52:48'!
 dividiteAEntero: aDivisor
 	| greatestCommonDivisor numerator denominator |
 
@@ -600,7 +600,7 @@ dividiteAEntero: aDivisor
 	numerator := aDivisor // greatestCommonDivisor.
 	denominator := self // greatestCommonDivisor.
 
-	^denominator dividiteACoprimoPositivo: numerator! !
+	^denominator dividiteACoprimo: numerator! !
 
 !EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:46:00'!
 fibonacci
@@ -627,14 +627,14 @@ EnteroPositivo subclass: #EnteroUnidad
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:32:32'!
-dividiteACoprimoPositivo: enteroADividir
+!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:52:48'!
+dividiteACoprimo: enteroADividir
 	^Entero with: enteroADividir integerValue 
 	! !
 
-!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:02:16'!
+!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:52:48'!
 dividiteAEntero: enteroADividir
-	^self dividiteACoprimoPositivo: enteroADividir
+	^self dividiteACoprimo: enteroADividir
 	! !
 
 !EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 17:45:36'!
