@@ -387,9 +387,8 @@ Numero subclass: #Entero
 	(aSubtrahend isKindOf: Fraccion) ifTrue: [^Fraccion with: (self  * aSubtrahend denominator  - aSubtrahend numerator) over: 	(aSubtrahend denominator )].
 "! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:30:20'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:57:46'!
 / aDivisor
-
 	^aDivisor dividiteAEntero: self! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 18:06:53'!
@@ -397,11 +396,10 @@ Numero subclass: #Entero
 
 	^Entero with: value // aDivisor integerValue! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'MS 9/12/2023 16:23:43'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:55:22'!
 dividiteAEntero: enteroADividir
-	^Fraccion with: enteroADividir over: self
-	
-! !
+
+	self subclassResponsibility! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'MS 9/12/2023 16:33:14'!
 dividiteAFraccion: fraccionADividir
@@ -464,13 +462,18 @@ hash
 	^value hash! !
 
 
-!Entero methodsFor: 'initialization' stamp: 'psm 9/12/2023 17:49:50'!
+!Entero methodsFor: 'initialization' stamp: 'psm 9/12/2023 21:11:14'!
+initalizeSubClasifiedWith: aValue
+
+	(aValue < 0) ifTrue: [^EnteroNegativo new initalizeWith: aValue].
+	(aValue = 1) ifTrue: [^EnteroUnidad new initalizeWith: aValue].
+	(aValue = 0) ifTrue: [^EnteroNulo new initalizeWith: aValue].
+	(aValue > 1) ifTrue: [^EnteroPositivo new initalizeWith: aValue]! !
+
+!Entero methodsFor: 'initialization' stamp: 'psm 9/12/2023 21:37:20'!
 initalizeWith: aValue
 
-	(aValue < 0) ifTrue: [^EnteroNegativo with: aValue].
-	(aValue = 1) ifTrue: [^EnteroUnidad with: aValue].
-	(aValue = 0) ifTrue: [^EnteroNulo with: aValue].
-	(aValue > 1) ifTrue: [^EnteroPositivo with: aValue]! !
+	^self subclassResponsibility ! !
 
 
 !Entero methodsFor: 'value' stamp: 'HernanWilkinson 5/7/2016 21:02'!
@@ -512,13 +515,13 @@ Entero class
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'HernanWilkinson 5/7/2016 22:53'!
+!Entero class methodsFor: 'instance creation' stamp: 'psm 9/12/2023 21:37:34'!
 with: aValue
 
 	"Esta verificacion esta puesta por si se equivocan y quieren crear un Entero pasando otra cosa que un Integer - Hernan"
 	aValue isInteger ifFalse: [  self error: 'aValue debe ser anInteger' ].
 
-	^self new initalizeWith: aValue! !
+	^self new initalizeSubClasifiedWith: aValue! !
 
 
 !classDefinition: #EnteroNegativo category: 'Numero-Exercise'!
@@ -533,6 +536,12 @@ initalizeWith: aValue
 
 	value := aValue! !
 
+
+!EnteroNegativo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:59:11'!
+dividiteAEntero: enteroADividir
+	^self negated dividiteAEntero: enteroADividir negated
+	
+! !
 
 !EnteroNegativo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:41:47'!
 fibonacci
@@ -554,6 +563,12 @@ initalizeWith: aValue
 	value := aValue! !
 
 
+!EnteroNulo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:55:22'!
+dividiteAEntero: enteroADividir
+	^self error: self class canNotDivideByZeroErrorDescription 
+	
+! !
+
 !EnteroNulo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:42:07'!
 fibonacci
 
@@ -567,6 +582,25 @@ Entero subclass: #EnteroPositivo
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
+
+!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:00:32'!
+dividiteACoprimoPositivo: numerator
+
+	|fraccionDeLaDivisionCoprima|
+	
+	fraccionDeLaDivisionCoprima := Fraccion new.
+	
+	^fraccionDeLaDivisionCoprima initializeWith: numerator over: self! !
+
+!EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 21:35:54'!
+dividiteAEntero: aDivisor
+	| greatestCommonDivisor numerator denominator |
+
+	greatestCommonDivisor := self greatestCommonDivisorWith: aDivisor.
+	numerator := aDivisor // greatestCommonDivisor.
+	denominator := self // greatestCommonDivisor.
+
+	^denominator dividiteACoprimoPositivo: numerator! !
 
 !EnteroPositivo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:46:00'!
 fibonacci
@@ -592,6 +626,16 @@ EnteroPositivo subclass: #EnteroUnidad
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
+
+!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:32:32'!
+dividiteACoprimoPositivo: enteroADividir
+	^Entero with: enteroADividir integerValue 
+	! !
+
+!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:02:16'!
+dividiteAEntero: enteroADividir
+	^self dividiteACoprimoPositivo: enteroADividir
+	! !
 
 !EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 17:45:36'!
 fibonacci
@@ -631,7 +675,7 @@ Numero subclass: #Fraccion
 	(aDivisor isKindOf: Entero) ifTrue: [^Fraccion with: self numerator over: self denominator * aDivisor].
 	"! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'MS 9/12/2023 16:48:35'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:55:22'!
 dividiteAEntero: enteroADividir
 	^Fraccion with: enteroADividir * denominator over: numerator
 	! !
@@ -696,13 +740,13 @@ numerator
 	^ numerator! !
 
 
-!Fraccion methodsFor: 'initialization' stamp: 'HernanWilkinson 5/7/2016 22:54'!
+!Fraccion methodsFor: 'initialization' stamp: 'psm 9/12/2023 21:06:59'!
 initializeWith: aNumerator over: aDenominator
 
 	"Estas precondiciones estan por si se comenten errores en la implementacion - Hernan"
 	aNumerator isZero ifTrue: [ self error: 'una fraccion no puede ser cero' ].
 	aDenominator isOne ifTrue: [ self error: 'una fraccion no puede tener denominador 1 porque sino es un entero' ].
-
+	
 	numerator := aNumerator.
 	denominator := aDenominator ! !
 
@@ -737,21 +781,8 @@ printOn: aStream
 Fraccion class
 	instanceVariableNames: ''!
 
-!Fraccion class methodsFor: 'intance creation' stamp: 'NR 9/23/2018 23:45:19'!
+!Fraccion class methodsFor: 'intance creation' stamp: 'psm 9/12/2023 21:07:38'!
 with: aDividend over: aDivisor
 
-	| greatestCommonDivisor numerator denominator |
-
-	aDivisor isZero ifTrue: [ self error: self canNotDivideByZeroErrorDescription ].
-	aDividend isZero ifTrue: [ ^aDividend ].
-
-	aDivisor isNegative ifTrue:[ ^aDividend negated / aDivisor negated].
-
-	greatestCommonDivisor := aDividend greatestCommonDivisorWith: aDivisor.
-	numerator := aDividend // greatestCommonDivisor.
-	denominator := aDivisor // greatestCommonDivisor.
-
-	denominator isOne ifTrue: [ ^numerator ].
-
-	^self new initializeWith: numerator over: denominator
+	^aDivisor dividiteAEntero: aDividend 
 	! !
