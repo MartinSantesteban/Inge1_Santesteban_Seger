@@ -376,9 +376,9 @@ Numero subclass: #Entero
 	
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:35:52'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:28:31'!
 - aSubtrahend
-"
+"	Metodo con menos codigo:
 	^aSubtrahend * -1 + self
 "
 	^ aSubtrahend restateAEntero: self
@@ -391,10 +391,10 @@ Numero subclass: #Entero
 / aDivisor
 	^aDivisor dividiteAEntero: self! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 18:06:53'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:28:46'!
 // aDivisor
 
-	^Entero with: value // aDivisor integerValue! !
+	^self class with: value // aDivisor integerValue! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:55:22'!
 dividiteAEntero: enteroADividir
@@ -412,14 +412,14 @@ fibonacci
 
 	self subclassResponsibility! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 18:16:20'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:29:11'!
 greatestCommonDivisorWith: anEntero
 
-	^Entero with: (value gcd: anEntero integerValue)! !
+	^self class with: (value gcd: anEntero integerValue)! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 18:16:12'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:29:19'!
 multiplicateAEntero: primerEnteroAMultiplicar
-	^Entero with: (value * primerEnteroAMultiplicar integerValue)
+	^self class with: (value * primerEnteroAMultiplicar integerValue)
 	! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'MS 9/12/2023 16:11:51'!
@@ -428,10 +428,10 @@ multiplicateAFraccion: primerFraccionAMultiplicar
 	
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 18:01:23'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:29:29'!
 restateAEntero: primerRestandoEntero
 
-	^Entero with: primerRestandoEntero integerValue - value
+	^self class with: primerRestandoEntero integerValue - value
 ! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:00:46'!
@@ -439,10 +439,10 @@ restateAFraccion: primerRestandoFraccion
 
 	^Fraccion with: (primerRestandoFraccion numerator - (self * primerRestandoFraccion denominator)) over: primerRestandoFraccion denominator! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'MS 9/12/2023 15:53:14'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:29:38'!
 sumateAEntero: primerSumandoEntero
 
-	^ Entero with: (value + primerSumandoEntero integerValue).
+	^ self class with: (value + primerSumandoEntero integerValue).
 	
 ! !
 
@@ -462,18 +462,10 @@ hash
 	^value hash! !
 
 
-!Entero methodsFor: 'initialization' stamp: 'psm 9/12/2023 21:11:14'!
-initalizeSubClasifiedWith: aValue
-
-	(aValue < 0) ifTrue: [^EnteroNegativo new initalizeWith: aValue].
-	(aValue = 1) ifTrue: [^EnteroUnidad new initalizeWith: aValue].
-	(aValue = 0) ifTrue: [^EnteroNulo new initalizeWith: aValue].
-	(aValue > 1) ifTrue: [^EnteroPositivo new initalizeWith: aValue]! !
-
-!Entero methodsFor: 'initialization' stamp: 'psm 9/12/2023 21:37:20'!
+!Entero methodsFor: 'initialization' stamp: 'psm 9/13/2023 23:27:18'!
 initalizeWith: aValue
 
-	^self subclassResponsibility ! !
+	value := aValue! !
 
 
 !Entero methodsFor: 'value' stamp: 'HernanWilkinson 5/7/2016 21:02'!
@@ -511,17 +503,25 @@ isZero
 Entero class
 	instanceVariableNames: ''!
 
+!Entero class methodsFor: 'instance creation' stamp: 'psm 9/13/2023 23:26:31'!
+initalizeSubClasifiedWith: aValue
+
+	(aValue < 0) ifTrue: [^EnteroNegativo new initalizeWith: aValue].
+	(aValue = 1) ifTrue: [^EnteroUnidad new initalizeWith: aValue].
+	(aValue = 0) ifTrue: [^EnteroNulo new initalizeWith: aValue].
+	(aValue > 1) ifTrue: [^EnteroPositivo new initalizeWith: aValue]! !
+
 !Entero class methodsFor: 'instance creation' stamp: 'psm 9/12/2023 18:17:13'!
 negativeFibonacciErrorDescription
 	^ ' Fibonacci no está definido aquí para Enteros Negativos!!!!!!'! !
 
-!Entero class methodsFor: 'instance creation' stamp: 'psm 9/12/2023 21:37:34'!
+!Entero class methodsFor: 'instance creation' stamp: 'psm 9/13/2023 23:26:41'!
 with: aValue
 
 	"Esta verificacion esta puesta por si se equivocan y quieren crear un Entero pasando otra cosa que un Integer - Hernan"
 	aValue isInteger ifFalse: [  self error: 'aValue debe ser anInteger' ].
 
-	^self new initalizeSubClasifiedWith: aValue! !
+	^self initalizeSubClasifiedWith: aValue! !
 
 
 !classDefinition: #EnteroNegativo category: 'Numero-Exercise'!
@@ -530,11 +530,6 @@ Entero subclass: #EnteroNegativo
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
-
-!EnteroNegativo methodsFor: 'initialization' stamp: 'psm 9/12/2023 17:20:51'!
-initalizeWith: aValue
-
-	value := aValue! !
 
 
 !EnteroNegativo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:59:11'!
@@ -557,11 +552,6 @@ Entero subclass: #EnteroNulo
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!EnteroNulo methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 17:31:39'!
-initalizeWith: aValue
-
-	value := aValue! !
-
 
 !EnteroNulo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 20:55:22'!
 dividiteAEntero: enteroADividir
@@ -569,10 +559,10 @@ dividiteAEntero: enteroADividir
 	
 ! !
 
-!EnteroNulo methodsFor: 'arithmetic operations' stamp: 'psm 9/12/2023 17:42:07'!
+!EnteroNulo methodsFor: 'arithmetic operations' stamp: 'psm 9/13/2023 23:31:05'!
 fibonacci
 
-	^Entero with: 1.
+	^self class with: 1.
 		! !
 
 
@@ -614,11 +604,6 @@ fibonacci
 		! !
 
 
-!EnteroPositivo methodsFor: 'initialization' stamp: 'psm 9/12/2023 17:20:51'!
-initalizeWith: aValue
-
-	value := aValue! !
-
 
 !classDefinition: #EnteroUnidad category: 'Numero-Exercise'!
 EnteroPositivo subclass: #EnteroUnidad
@@ -627,9 +612,9 @@ EnteroPositivo subclass: #EnteroUnidad
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:52:48'!
+!EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/13/2023 23:32:25'!
 dividiteACoprimo: enteroADividir
-	^Entero with: enteroADividir integerValue 
+	^self class with: enteroADividir integerValue 
 	! !
 
 !EnteroUnidad methodsFor: 'as yet unclassified' stamp: 'psm 9/12/2023 21:52:48'!
