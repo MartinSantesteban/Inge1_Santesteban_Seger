@@ -158,11 +158,13 @@ bigStackRemainsTheSameAfterUsingPrefix: aPrefix
 	self assert: (self thisStack: bigStack isEqualToThisStack: bigStack2).
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'stackAuxiliaryOperationsForTesting' stamp: 'MS 9/17/2023 22:50:40'!
+!SentenceFinderByPrefixTest methodsFor: 'stackAuxiliaryOperationsForTesting' stamp: 'psm 9/18/2023 00:51:00'!
 thisStack: fstStack isEqualToThisStack: sndStack
 	"Definimos esta operacion para poder testear prolijamente en SentenceFinderByPrefixTest"
 	| allElementsAreEqual |
-	fstStack = sndStack ifTrue: [^true].
+	"chequeo en caso que sea la misma posicion de memoria"
+	fstStack = sndStack ifTrue: [^true]. 
+	
 	allElementsAreEqual := (sndStack isKindOf: fstStack class) and: (sndStack size = fstStack size).
 
 	(allElementsAreEqual and: (fstStack size > 0)) ifTrue: [
@@ -255,7 +257,7 @@ test05_failedFindOnEmptyStack
 	
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'MS 9/17/2023 23:51:01'!
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'psm 9/18/2023 01:09:43'!
 test06_succesfulFindOnBigStack
 	| sentences |
 	
@@ -456,25 +458,69 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'MS 9/17/2023 23:41:29'!
-findSentencesIn: aStack withPrefix: aPrefix
-	| aString validSentences |
-	
-	self validPrefix: aPrefix.
-	
-	aStack isEmpty ifTrue: [^OrderedCollection  new.].
-	aString := aStack pop.
-	validSentences := self findSentencesIn: aStack withPrefix: aPrefix. 
-	(aString is: aPrefix substringAt: 1) ifTrue:[validSentences add: aString.].
-	aStack push: aString. 
-	^validSentences
-	
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:18:41'!
+array: anArray at: index HasPrefix: aPrefix saveAtTheBeginingOf: validSentences
+
+	((anArray at: index) is: aPrefix substringAt: 1)
+            ifTrue:[validSentences addFirst: (anArray at: index). ].
+
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'MS 9/17/2023 23:28:17'!
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:32:24'!
+iterateInStack: aStack withPrefix: aPrefix toBeRestoredIn: stackElements andSaveFindsIn: validSentences
+	|index|
+	index := aStack size.
+   	index timesRepeat: [
+ 		stackElements at: index put: aStack pop.
+    	        self array: stackElements at: index HasPrefix: aPrefix saveAtTheBeginingOf: validSentences .
+        		index := index - 1.
+        ].
+
+	! !
+
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:27:58'!
+lookForSentencesIn: aStack withPrefix: aPrefix
+    | validSentences stackElements|
+
+    validSentences := OrderedCollection new.
+    stackElements := Array new: aStack size.
+    
+    self 
+	iterateInStack: aStack 
+	withPrefix: aPrefix 
+	toBeRestoredIn: stackElements 
+	andSaveFindsIn: validSentences .
+
+    self restoreStack: aStack withElements: stackElements .
+
+    ^validSentences.
+
+	! !
+
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:22:00'!
+restoreStack: aStack withElements: stackElements
+
+    stackElements do: [:stackElement | aStack push: stackElement ].
+
+	! !
+
+
+!SentenceFinderByPrefix methodsFor: 'check for valid entry' stamp: 'psm 9/18/2023 01:28:43'!
 validPrefix: aPrefix
-	aPrefix isEmpty ifTrue: [self error: self class emptyPrefixError.].
-	(aPrefix allSatisfy: [:character | character isSeparator not.]) ifFalse: [self error: self class spacesInPrefixError .].! !
+	aPrefix isEmpty
+		ifTrue: [self error: self class emptyPrefixError.].
+	(aPrefix allSatisfy: [:character | character isSeparator not.]) 
+		ifFalse: [self error: self class spacesInPrefixError .].! !
+
+
+!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'psm 9/18/2023 01:15:33'!
+findSentencesIn: aStack withPrefix: aPrefix
+
+    self validPrefix: aPrefix.
+
+    ^self lookForSentencesIn: aStack withPrefix: aPrefix .
+
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
