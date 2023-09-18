@@ -327,9 +327,9 @@ top
 	^topElement value! !
 
 
-!OOStack methodsFor: 'testing' stamp: 'psm 9/18/2023 15:49:27'!
+!OOStack methodsFor: 'testing' stamp: 'psm 9/18/2023 15:54:42'!
 = anotherStack
-	
+	"chanchada orientada a objetos: uso interesante de polimorfismo"
 	^((anotherStack isKindOf: self class) or: (anotherStack isKindOf: topElement class)) 
 		and: [anotherStack = topElement] .! !
 
