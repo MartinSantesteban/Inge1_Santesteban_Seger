@@ -458,21 +458,25 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:18:41'!
-array: anArray at: index HasPrefix: aPrefix saveAtTheBeginingOf: validSentences
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:37:08'!
+array: anArray at: index ifItHasPrefix: aPrefix saveAtTheBeginingOf: validSentences
 
 	((anArray at: index) is: aPrefix substringAt: 1)
             ifTrue:[validSentences addFirst: (anArray at: index). ].
 
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:32:24'!
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:38:21'!
 iterateInStack: aStack withPrefix: aPrefix toBeRestoredIn: stackElements andSaveFindsIn: validSentences
 	|index|
 	index := aStack size.
    	index timesRepeat: [
  		stackElements at: index put: aStack pop.
-    	        self array: stackElements at: index HasPrefix: aPrefix saveAtTheBeginingOf: validSentences .
+    	        self 
+			array: stackElements 
+			at: index 
+			ifItHasPrefix: aPrefix 
+			saveAtTheBeginingOf: validSentences .
         		index := index - 1.
         ].
 
