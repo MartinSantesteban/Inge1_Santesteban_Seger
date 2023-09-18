@@ -152,31 +152,11 @@ assertExpectedOutput: aCollectionOfValidSentences withStackOfSentences: aStackOf
 	self assert: (anOrderedCollection = aCollectionOfValidSentences).
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'stackAuxiliaryOperationsForTesting' stamp: 'MS 9/18/2023 00:00:04'!
+!SentenceFinderByPrefixTest methodsFor: 'stackAuxiliaryOperationsForTesting' stamp: 'psm 9/18/2023 15:47:44'!
 bigStackRemainsTheSameAfterUsingPrefix: aPrefix
 	sentenceFinderByPrefix findSentencesIn: bigStack withPrefix: aPrefix.
-	self assert: (self thisStack: bigStack isEqualToThisStack: bigStack2).
+	self assert: (bigStack = bigStack2).
 	! !
-
-!SentenceFinderByPrefixTest methodsFor: 'stackAuxiliaryOperationsForTesting' stamp: 'psm 9/18/2023 00:51:00'!
-thisStack: fstStack isEqualToThisStack: sndStack
-	"Definimos esta operacion para poder testear prolijamente en SentenceFinderByPrefixTest"
-	| allElementsAreEqual |
-	"chequeo en caso que sea la misma posicion de memoria"
-	fstStack = sndStack ifTrue: [^true]. 
-	
-	allElementsAreEqual := (sndStack isKindOf: fstStack class) and: (sndStack size = fstStack size).
-
-	(allElementsAreEqual and: (fstStack size > 0)) ifTrue: [
-		| fstTop sndTop |
-		fstTop := fstStack pop.
-		sndTop := sndStack pop.
-		allElementsAreEqual  := (self thisStack: fstStack isEqualToThisStack: sndStack)  and: (fstTop value = sndTop value).
-		fstStack push: fstTop.
-		sndStack push: sndTop.
-	].
-
-	^allElementsAreEqual ! !
 
 
 !SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'MS 9/17/2023 22:18:00'!
@@ -276,26 +256,26 @@ test07_failedFindOnBigStackBecauseOfLowerCase
 	
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'MS 9/17/2023 23:51:41'!
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'psm 9/18/2023 15:22:07'!
 test08_sameStackEqualitySuccesful
 
-	self assert: (self thisStack: bigStack isEqualToThisStack: bigStack ).
+	self assert: (bigStack = bigStack ).
 
 
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'MS 9/17/2023 22:56:21'!
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'psm 9/18/2023 15:21:57'!
 test09_differentStacksEqualitySuccesful
 	
-	self assert: (self thisStack: bigStack isEqualToThisStack: bigStack2 ).
+	self assert: (bigStack = bigStack2 ).
 
 
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'MS 9/17/2023 22:56:37'!
+!SentenceFinderByPrefixTest methodsFor: 'testing' stamp: 'psm 9/18/2023 15:21:38'!
 test10_differentStacksEqualityFailed
 	
-	self deny: (self thisStack: bigStack isEqualToThisStack: emptyStack ).
+	self deny: (bigStack = emptyStack ).
 
 
 ! !
@@ -326,10 +306,6 @@ Object subclass: #OOStack
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'operations' stamp: 'MS 9/17/2023 17:57:51'!
-isEmpty
-	^topElement isEmpty! !
-
 !OOStack methodsFor: 'operations' stamp: 'MS 9/17/2023 18:40:50'!
 pop
 	|value|
@@ -349,6 +325,17 @@ size
 !OOStack methodsFor: 'operations' stamp: 'MS 9/17/2023 18:38:47'!
 top
 	^topElement value! !
+
+
+!OOStack methodsFor: 'testing' stamp: 'psm 9/18/2023 15:49:27'!
+= anotherStack
+	
+	^((anotherStack isKindOf: self class) or: (anotherStack isKindOf: topElement class)) 
+		and: [anotherStack = topElement] .! !
+
+!OOStack methodsFor: 'testing' stamp: 'MS 9/17/2023 17:57:51'!
+isEmpty
+	^topElement isEmpty! !
 
 
 !OOStack methodsFor: 'initialization' stamp: 'psm 9/17/2023 19:05:32'!
@@ -374,17 +361,22 @@ OOStack subclass: #StackBase
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!StackBase methodsFor: 'operations' stamp: 'MS 9/17/2023 18:00:38'!
+!StackBase methodsFor: 'testing' stamp: 'psm 9/18/2023 15:34:54'!
+= aStackBase
+	^aStackBase isKindOf: self class.! !
+
+!StackBase methodsFor: 'testing' stamp: 'MS 9/17/2023 18:00:38'!
 isEmpty
 	^true! !
+
+!StackBase methodsFor: 'testing' stamp: 'MS 9/17/2023 18:01:21'!
+size
+	^0! !
+
 
 !StackBase methodsFor: 'operations' stamp: 'psm 9/17/2023 19:06:19'!
 lowerElement
 	^ self error: self class stackEmptyErrorDescription ! !
-
-!StackBase methodsFor: 'operations' stamp: 'MS 9/17/2023 18:01:21'!
-size
-	^0! !
 
 !StackBase methodsFor: 'operations' stamp: 'psm 9/17/2023 19:06:24'!
 value
@@ -415,17 +407,9 @@ OOStack subclass: #StackElement
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!StackElement methodsFor: 'operations' stamp: 'MS 9/17/2023 18:01:06'!
-isEmpty
-	^false! !
-
 !StackElement methodsFor: 'operations' stamp: 'MS 9/17/2023 18:40:08'!
 lowerElement
 	^lowerElement! !
-
-!StackElement methodsFor: 'operations' stamp: 'MS 9/17/2023 18:01:48'!
-size
-	^ 1 + lowerElement size! !
 
 !StackElement methodsFor: 'operations' stamp: 'MS 9/17/2023 18:39:20'!
 value
@@ -438,6 +422,21 @@ initializeWith: aValue Over: aLowerElement
 	lowerElement := aLowerElement.
 	
 	! !
+
+
+!StackElement methodsFor: 'testing' stamp: 'psm 9/18/2023 15:46:28'!
+= aStackElement
+
+	^(aStackElement isKindOf: self class) and:
+		 [aStackElement value = self value and: aStackElement lowerElement = self lowerElement ].! !
+
+!StackElement methodsFor: 'testing' stamp: 'MS 9/17/2023 18:01:06'!
+isEmpty
+	^false! !
+
+!StackElement methodsFor: 'testing' stamp: 'MS 9/17/2023 18:01:48'!
+size
+	^ 1 + lowerElement size! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
