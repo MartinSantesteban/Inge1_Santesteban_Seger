@@ -466,18 +466,15 @@ array: anArray at: index ifItHasPrefix: aPrefix saveAtTheBeginingOf: validSenten
 
 	! !
 
-!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 01:38:21'!
+!SentenceFinderByPrefix methodsFor: 'auxiliar operations' stamp: 'psm 9/18/2023 02:59:06'!
 iterateInStack: aStack withPrefix: aPrefix toBeRestoredIn: stackElements andSaveFindsIn: validSentences
-	|index|
-	index := aStack size.
-   	index timesRepeat: [
+	 aStack size to: 1 by: -1 do: [:index|
  		stackElements at: index put: aStack pop.
     	        self 
 			array: stackElements 
 			at: index 
 			ifItHasPrefix: aPrefix 
 			saveAtTheBeginingOf: validSentences .
-        		index := index - 1.
         ].
 
 	! !
