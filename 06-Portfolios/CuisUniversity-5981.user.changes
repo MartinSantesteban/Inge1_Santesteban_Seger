@@ -48346,3 +48346,2088 @@ hasReceptiveAccountInCommon: aFinancialEntity
 ----SNAPSHOT----(17 October 2023 17:51:43) CuisUniversity-5981.image priorSource: 12017760!
 
 ----SNAPSHOT----(17 October 2023 17:52:58) CuisUniversity-5981.image priorSource: 12096153!
+
+----STARTUP---- (17 October 2023 17:59:00) as /home/pablosm/cuisUniversity/CuisUniversity-5981.image!
+
+!SetOfFinancialEntities methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57'!
+hasFinancialEntityAccountInCommon: aReceptiveAccount
+
+	self subclassResponsibility! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' overrides: 50709665!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasReceptiveAccountInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasReceptiveAccountInCommon: aFinancialEntity.].].].
+	
+	! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' overrides: 50709665!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^aFinancialEntity includesReceptiveAccount: self! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' prior: 50709643 overrides: 50705061!
+hasReceptiveAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityAccountInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityAccountInCommon: aFinancialEntity.].].].
+	
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' prior: 50709112!
+rootPortfolioHaveReceptiveAccountInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityAccountInCommon: rootFE]])				
+		
+		
+		
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' prior: 50705237 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+	^ self hasFinancialEntityAccountInCommon: aReceptiveAccount ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:00:57' prior: 50709671 overrides: 50709665!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityAccountInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityAccountInCommon: aFinancialEntity.].].].
+	
+	! !
+
+!methodRemoval: SetOfFinancialEntities #hasReceptiveAccountInCommon: stamp: 'psm 10/17/2023 18:00:57'!
+hasReceptiveAccountInCommon: aReceptiveAccount
+
+	self subclassResponsibility!
+
+!methodRemoval: Portfolio #hasReceptiveAccountInCommon: stamp: 'psm 10/17/2023 18:00:57'!
+hasReceptiveAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityAccountInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityAccountInCommon: aFinancialEntity.].].].
+	
+	!
+
+!methodRemoval: ReceptiveAccount #hasReceptiveAccountInCommon: stamp: 'psm 10/17/2023 18:00:57'!
+hasReceptiveAccountInCommon: aFinancialEntity
+	
+	^aFinancialEntity includesReceptiveAccount: self!
+
+!methodRemoval: Portfolio #hasPortfolioInCommon: stamp: 'psm 10/17/2023 18:01:14'!
+hasPortfolioInCommon: aPortfolio
+	^(self = aPortfolio ) or: [storedFinancialEntities anySatisfy: 
+		[:aFinancialEntity | (aFinancialEntity isKindOf: Portfolio) 
+			and: [(aFinancialEntity hasPortfolioInCommon: aPortfolio) 
+			        or: [aPortfolio hasPortfolioInCommon: aFinancialEntity.].].].].
+	
+	
+	!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:01:57' prior: 50708018!
+rootPortfoliosHavePortfolioInCommon: aPortfolio
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aPortfolio rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinacialEntityInCommon: rootFE]])				
+		
+		
+		
+	! !
+!SetOfFinancialEntities methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23'!
+hasFinancialEntityInCommon: aReceptiveAccount
+
+	self subclassResponsibility! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' overrides: 50709786!
+hasFinancialEntityInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityAccountInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityAccountInCommon: aFinancialEntity.].].].
+	
+	! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' overrides: 50709786!
+hasFinancialEntityInCommon: aFinancialEntity
+	
+	^aFinancialEntity includesReceptiveAccount: self! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' prior: 50709725 overrides: 50709665!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].].
+	
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' prior: 50709706!
+rootPortfolioHaveReceptiveAccountInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' prior: 50709718 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+	^ self hasFinancialEntityInCommon: aReceptiveAccount ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:23' prior: 50709792 overrides: 50709786!
+hasFinancialEntityInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].].
+	
+	! !
+
+!methodRemoval: SetOfFinancialEntities #hasFinancialEntityAccountInCommon: stamp: 'psm 10/17/2023 18:02:23'!
+hasFinancialEntityAccountInCommon: aReceptiveAccount
+
+	self subclassResponsibility!
+
+!methodRemoval: Portfolio #hasFinancialEntityAccountInCommon: stamp: 'psm 10/17/2023 18:02:23'!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].].
+	
+	!
+
+!methodRemoval: ReceptiveAccount #hasFinancialEntityAccountInCommon: stamp: 'psm 10/17/2023 18:02:23'!
+hasFinancialEntityAccountInCommon: aFinancialEntity
+	
+	^aFinancialEntity includesReceptiveAccount: self!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:02:58' prior: 50709776!
+rootPortfoliosHavePortfolioInCommon: aPortfolio
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aPortfolio rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:03:55'!
+rootPortfolioHaveFinancialEntityInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:03:55' prior: 50709075!
+add: aFinancialEntity 
+	
+	(aFinancialEntity isKindOf: Portfolio) ifTrue: 
+		[ (self rootPortfoliosHavePortfolioInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]
+		].
+	 	
+	(self rootPortfolioHaveFinancialEntityInCommon: aFinancialEntity)
+			ifTrue: [^self error: self class accountAlreadyInPorfolioError.].
+	
+	aFinancialEntity newFatherPortfolio: self.	
+	storedFinancialEntities add: aFinancialEntity .! !
+
+!methodRemoval: Portfolio #rootPortfolioHaveReceptiveAccountInCommon: stamp: 'psm 10/17/2023 18:03:55'!
+rootPortfolioHaveReceptiveAccountInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:04:12'!
+rootPortfoliosHaveFinancialEntityInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:04:12' prior: 50709905!
+add: aFinancialEntity 
+	
+	(aFinancialEntity isKindOf: Portfolio) ifTrue: 
+		[ (self rootPortfoliosHavePortfolioInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]
+		].
+	 	
+	(self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity)
+			ifTrue: [^self error: self class accountAlreadyInPorfolioError.].
+	
+	aFinancialEntity newFatherPortfolio: self.	
+	storedFinancialEntities add: aFinancialEntity .! !
+
+!methodRemoval: Portfolio #rootPortfolioHaveFinancialEntityInCommon: stamp: 'psm 10/17/2023 18:04:12'!
+rootPortfolioHaveFinancialEntityInCommon: aReceptiveAccount
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aReceptiveAccount rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	!
+
+!methodRemoval: Portfolio #rootPortfoliosHavePortfolioInCommon: stamp: 'psm 10/17/2023 18:04:22'!
+rootPortfoliosHavePortfolioInCommon: aPortfolio
+	^(self rootPortfolio anySatisfy: [:aRootPortfolio|
+		aPortfolio rootPortfolio anySatisfy:[: rootFE |
+					 aRootPortfolio hasFinancialEntityInCommon: rootFE]])				
+		
+		
+		
+	!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:04:40' prior: 50709944!
+add: aFinancialEntity 
+	
+	(aFinancialEntity isKindOf: Portfolio) ifTrue: 
+		[ (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]
+		].
+	 	
+	(self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity)
+			ifTrue: [^self error: self class accountAlreadyInPorfolioError.].
+	
+	aFinancialEntity newFatherPortfolio: self.	
+	storedFinancialEntities add: aFinancialEntity .! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:04:50'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:08:05'!
+avoidPortfoliosInANestedConectionFromHavingTheSameEntity: aFinancialEntity 
+	
+	 (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]! !
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:08:14'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:09:11'!
+avoidConectedPortfoliosFromHavingTheSameEntity: aFinancialEntity 
+	
+	 (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]! !
+
+!methodRemoval: Portfolio #avoidPortfoliosInANestedConectionFromHavingTheSameEntity: stamp: 'psm 10/17/2023 18:09:11'!
+avoidPortfoliosInANestedConectionFromHavingTheSameEntity: aFinancialEntity 
+	
+	 (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:10:37' prior: 50710166!
+avoidConectedPortfoliosFromHavingTheSameEntity: aFinancialEntity 
+	
+	 (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: aFinancialEntity collisionErrorMessage.]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:11:12'!
+collisionErrorMessage
+
+	^self class portfolioAlreadyInPorfolioError ! !
+!SetOfFinancialEntities methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:11:18'!
+collisionErrorMessage
+
+	self subclassResponsibility! !
+!SetOfFinancialEntities class methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:11:30'!
+accountAlreadyInPorfolioError
+	'This account has already been added to this porfolio!!'! !
+
+!methodRemoval: Portfolio class #accountAlreadyInPorfolioError stamp: 'psm 10/17/2023 18:11:30'!
+accountAlreadyInPorfolioError
+	'This account has already been added to this porfolio!!'!
+!SetOfFinancialEntities class methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:11:47'!
+portfolioAlreadyInPorfolioError
+
+	self subclassResponsibility! !
+!SetOfFinancialEntities class methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:11:52' prior: 50710220!
+portfolioAlreadyInPorfolioError
+	'This portfolio has already been added to this porfolio!!'! !
+
+!methodRemoval: Portfolio class #portfolioAlreadyInPorfolioError stamp: 'psm 10/17/2023 18:11:52'!
+portfolioAlreadyInPorfolioError
+	'This portfolio has already been added to this porfolio!!'!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:12:41' overrides: 50710203!
+collisionErrorMessage
+
+	self subclassResponsibility! !
+!SetOfFinancialEntities methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:12:41' prior: 50710203!
+collisionErrorMessage
+
+	self subclassResponsibility! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:13:04' prior: 50710239 overrides: 50710245!
+collisionErrorMessage
+
+	^self class accountAlreadyInPorfolioError ! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:14:17'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:14:28' prior: 50709983!
+add: aFinancialEntity 
+	
+	"(aFinancialEntity isKindOf: Portfolio) ifTrue: 
+		[ (self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity )				
+		       ifTrue: [^self error: self class portfolioAlreadyInPorfolioError.]
+		].
+	 	
+	(self rootPortfoliosHaveFinancialEntityInCommon: aFinancialEntity)
+			ifTrue: [^self error: self class accountAlreadyInPorfolioError.]."
+	
+	self avoidConectedPortfoliosFromHavingTheSameEntity: aFinancialEntity .
+	
+	aFinancialEntity newFatherPortfolio: self.	
+	storedFinancialEntities add: aFinancialEntity .! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:14:30'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:14:30'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:14:30'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:14:30'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:14:30'!
+FAILURE!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:14:42'!
+FAILURE!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:17:12'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:17:12'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:17:12'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:17:12'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:17:12'!
+FAILURE!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:17:15'!
+FAILURE!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:17:44'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:17:44'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:17:44'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:17:44'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:17:44'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:17:49'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:24:18' prior: 50705319 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+
+	"^ self = aReceptiveAccount"
+	(self = aReceptiveAccount) ifTrue: [self error: self collisionErrorMessage]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:26:06' prior: 50709845 overrides: 50709786!
+hasFinancialEntityInCommon: aFinancialEntity
+	
+	"^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].]."
+	
+	((self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].]) ifTrue:[self error: self collisionErrorMessage ]! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:26:10'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:26:10'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:26:10'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:26:10'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:26:10'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:26:10'!
+FAILURE!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:26:10'!
+ERROR!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'MS 10/15/2023 21:00:22' prior: 50710618 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+
+	^ self = aReceptiveAccount ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:27:04' prior: 50710627 overrides: 50709786!
+hasFinancialEntityInCommon: aFinancialEntity
+	
+	^(self = aFinancialEntity) or: [storedFinancialEntities anySatisfy: 
+		[:storedFinancialEntity |(aFinancialEntity hasFinancialEntityInCommon: storedFinancialEntity) 
+			        or: [storedFinancialEntity hasFinancialEntityInCommon: aFinancialEntity.].].].! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:27:06'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:27:06'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:27:06'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:27:06'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:27:06'!
+FAILURE!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:31:15'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:31:15'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:31:15'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:31:15'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:31:15'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:32:40' prior: 50710732 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+
+	(self = aReceptiveAccount )ifTrue:[self error: self collisionErrorMessage]! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'psm 10/17/2023 18:32:41'!
+PASSED!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:32:45'!
+ERROR!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:32:45'!
+ERROR!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:32:45'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:32:45'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:32:45'!
+FAILURE!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:32:45'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:32:45'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:32:45'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:34:01' prior: 50710917 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+
+	(self = aReceptiveAccount )
+		ifTrue:[self error: self collisionErrorMessage]
+		ifFalse: [^false]! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'psm 10/17/2023 18:34:04'!
+PASSED!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:34:08'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:34:08'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:34:08'!
+FAILURE!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:34:08'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:34:08'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:34:08'!
+FAILURE!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:34:17'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:34:58' prior: 50711034 overrides: 50705231!
+includesReceptiveAccount: aReceptiveAccount
+
+	^self = aReceptiveAccount ! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'psm 10/17/2023 18:34:59'!
+PASSED!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:35:03'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:35:03'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:35:03'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:35:03'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:35:03'!
+FAILURE!
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:35:27' prior: 50703213!
+test13_PortfolioWithAccountCannotStoreSameAccount
+	| aPortfolio anAccount |
+	aPortfolio := Portfolio new.
+	
+	anAccount := ReceptiveAccount new.
+	Deposit register: 200 on: anAccount.
+	
+	self
+	  should: [aPortfolio add: anAccount. aPortfolio add: anAccount.	]
+	  raise: Error
+		  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio portfolioAlreadyInPorfolioError ].	! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:35:37' prior: 50703284!
+test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio
+	| nestedAccount aPortfolio nestedPortfolio|
+	
+	nestedAccount := ReceptiveAccount new.
+	aPortfolio := Portfolio new.
+	nestedPortfolio := Portfolio new.
+	
+	nestedPortfolio add: nestedAccount.
+	aPortfolio add: nestedPortfolio.
+	
+	self
+	  should: [aPortfolio add: nestedAccount.	]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio portfolioAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:35:46' prior: 50708492!
+test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree
+
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.		
+	
+	fstPortfolio add: sndPortfolio.
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: anAccount.
+	 
+	self
+	  should: [trdPortfolio add: anAccount.]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio  portfolioAlreadyInPorfolioError].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:35:59' prior: 50709052!
+test25_PruebaDeFuego_ReceptiveAccount
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.		
+	anAccount := ReceptiveAccount new.
+	
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: trdPortfolio.
+	
+	fstPortfolio add: anAccount.
+	 
+	self
+	  should: [sndPortfolio add: anAccount .]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio  portfolioAlreadyInPorfolioError].	
+! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:36:00'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:36:01'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:36:01'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:36:01'!
+FAILURE!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:36:01'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:36:01'!
+FAILURE!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:36:05'!
+FAILURE!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:37:18'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:37:18'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:37:18'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:37:18'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:37:18'!
+FAILURE!
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:37:31' prior: 50711271!
+test13_PortfolioWithAccountCannotStoreSameAccount
+	| aPortfolio anAccount |
+	aPortfolio := Portfolio new.
+	
+	anAccount := ReceptiveAccount new.
+	Deposit register: 200 on: anAccount.
+	
+	self
+	  should: [aPortfolio add: anAccount. aPortfolio add: anAccount.	]
+	  raise: Error
+		  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:37:42' prior: 50711287!
+test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio
+	| nestedAccount aPortfolio nestedPortfolio|
+	
+	nestedAccount := ReceptiveAccount new.
+	aPortfolio := Portfolio new.
+	nestedPortfolio := Portfolio new.
+	
+	nestedPortfolio add: nestedAccount.
+	aPortfolio add: nestedPortfolio.
+	
+	self
+	  should: [aPortfolio add: nestedAccount.	]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:37:52' prior: 50711305!
+test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree
+
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.		
+	
+	fstPortfolio add: sndPortfolio.
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: anAccount.
+	 
+	self
+	  should: [trdPortfolio add: anAccount.]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:38:00' prior: 50711325!
+test25_PruebaDeFuego_ReceptiveAccount
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.		
+	anAccount := ReceptiveAccount new.
+	
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: trdPortfolio.
+	
+	fstPortfolio add: anAccount.
+	 
+	self
+	  should: [sndPortfolio add: anAccount .]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:38:14' prior: 50711567!
+test25_PruebaDeFuego_ReceptiveAccount
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.		
+	anAccount := ReceptiveAccount new.
+	
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: trdPortfolio.
+	
+	fstPortfolio add: anAccount.
+	 
+	self
+	  should: [sndPortfolio add: anAccount .]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: ReceptiveAccount accountAlreadyInPorfolioError ].	
+! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:38:15'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:38:15'!
+FAILURE!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:38:15'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:38:15'!
+PASSED!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:38:25'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:38:25'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:38:25'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:38:25'!
+PASSED!
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:38:57' prior: 50711513!
+test13_PortfolioWithAccountCannotStoreSameAccount
+	| aPortfolio anAccount |
+	aPortfolio := Portfolio new.
+	
+	anAccount := ReceptiveAccount new.
+	Deposit register: 200 on: anAccount.
+	
+	self
+	  should: [aPortfolio add: anAccount. aPortfolio add: anAccount.	]
+	  raise: Error
+		  withExceptionDo: [:anError | self assert: anError messageText equals: ReceptiveAccount accountAlreadyInPorfolioError ].	! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:39:07' prior: 50711529!
+test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio
+	| nestedAccount aPortfolio nestedPortfolio|
+	
+	nestedAccount := ReceptiveAccount new.
+	aPortfolio := Portfolio new.
+	nestedPortfolio := Portfolio new.
+	
+	nestedPortfolio add: nestedAccount.
+	aPortfolio add: nestedPortfolio.
+	
+	self
+	  should: [aPortfolio add: nestedAccount.	]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: ReceptiveAccount accountAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:39:14' prior: 50711547!
+test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree
+
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.		
+	
+	fstPortfolio add: sndPortfolio.
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: anAccount.
+	 
+	self
+	  should: [trdPortfolio add: anAccount.]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: ReceptiveAccount accountAlreadyInPorfolioError ].	
+! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:39:15'!
+PASSED!
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:39:59' prior: 50711587!
+test25_PruebaDeFuego_ReceptiveAccount
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.		
+	anAccount := ReceptiveAccount new.
+	
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: trdPortfolio.
+	
+	fstPortfolio add: anAccount.
+	 
+	self
+	  should: [sndPortfolio add: anAccount .]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:40:16' prior: 50710251 overrides: 50710245!
+collisionErrorMessage
+
+	^Portfolio accountAlreadyInPorfolioError ! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'psm 10/17/2023 18:40:18'!
+PASSED!
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:40:21'!
+FAILURE!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:40:21'!
+FAILURE!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:40:21'!
+FAILURE!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:40:21'!
+PASSED!
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:40:31' prior: 50711772!
+test13_PortfolioWithAccountCannotStoreSameAccount
+	| aPortfolio anAccount |
+	aPortfolio := Portfolio new.
+	
+	anAccount := ReceptiveAccount new.
+	Deposit register: 200 on: anAccount.
+	
+	self
+	  should: [aPortfolio add: anAccount. aPortfolio add: anAccount.	]
+	  raise: Error
+		  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:40:41' prior: 50711788!
+test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio
+	| nestedAccount aPortfolio nestedPortfolio|
+	
+	nestedAccount := ReceptiveAccount new.
+	aPortfolio := Portfolio new.
+	nestedPortfolio := Portfolio new.
+	
+	nestedPortfolio add: nestedAccount.
+	aPortfolio add: nestedPortfolio.
+	
+	self
+	  should: [aPortfolio add: nestedAccount.	]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+!TestsXX methodsFor: 'as yet unclassified' stamp: 'psm 10/17/2023 18:40:48' prior: 50711807!
+test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree
+
+	|fstPortfolio sndPortfolio trdPortfolio anAccount|
+	
+	fstPortfolio := Portfolio new.
+	sndPortfolio := Portfolio new.	
+	trdPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.		
+	
+	fstPortfolio add: sndPortfolio.
+	fstPortfolio add: trdPortfolio.
+	sndPortfolio add: anAccount.
+	 
+	self
+	  should: [trdPortfolio add: anAccount.]
+	  raise: Error
+	  withExceptionDo: [:anError | self assert: anError messageText equals: Portfolio accountAlreadyInPorfolioError ].	
+! !
+
+!testRun: #TestsXX #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test22_PruebaDeFuego stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+!testRun: #TestsXX #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 18:40:50'!
+PASSED!
+
+----QUIT----(17 October 2023 18:41:02) CuisUniversity-5981.image priorSource: 12096246!
