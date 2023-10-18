@@ -81942,3 +81942,86 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(17 October 2023 22:11:44) CuisUniversity-5981.image priorSource: 12227530!
+
+!classRenamed: #TestsXX as: #FinantialEntityTests stamp: 'psm 10/17/2023 22:13:36'!
+Smalltalk renameClassNamed: #TestsXX as: #FinantialEntityTests!
+
+!classRenamed: #FinantialEntityTests as: #SetOfFinancialEntitiesTests stamp: 'psm 10/17/2023 22:13:56'!
+Smalltalk renameClassNamed: #FinantialEntityTests as: #SetOfFinancialEntitiesTests!
+
+!testRun: #SetOfFinancialEntitiesTests #test01_NewPortfolioHasNoBalance stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test16_PortfolioCantStoreHimself stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test22_PruebaDeFuego stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test23_PruebaDeMuchoFuego stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!testRun: #SetOfFinancialEntitiesTests #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/17/2023 22:14:03'!
+PASSED!
+
+!classRenamed: #SetOfFinancialEntitiesTests as: #PortfolioTests stamp: 'psm 10/17/2023 22:14:24'!
+Smalltalk renameClassNamed: #SetOfFinancialEntitiesTests as: #PortfolioTests!
+
+----SNAPSHOT----(17 October 2023 22:14:28) CuisUniversity-5981.image priorSource: 13500592!
