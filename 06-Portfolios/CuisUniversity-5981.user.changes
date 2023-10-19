@@ -82406,3 +82406,101 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(19 October 2023 20:17:17) CuisUniversity-5981.image priorSource: 13507488!
+!FinancialEntities methodsFor: 'father object for myself' stamp: 'psm 10/19/2023 20:23:36' prior: 50709230!
+rootPortfolio
+	| allRootPortfolio |
+	fatherPortfolio isEmpty ifTrue: [^OrderedCollection with: self].
+	allRootPortfolio := OrderedCollection new.
+	fatherPortfolio inject: OrderedCollection new into: [:aCollection :aFather | aCollection , aFather rootPortfolio]. 
+	^allRootPortfolio! !
+!FinancialEntities methodsFor: 'father object for myself' stamp: 'psm 10/19/2023 20:24:25' prior: 50754043!
+rootPortfolio
+	| allRootPortfolio |
+	fatherPortfolio isEmpty ifTrue: [^OrderedCollection with: self].
+	allRootPortfolio := OrderedCollection new.
+	fatherPortfolio do: [:aFather |  aFather saveRootsTo: allRootPortfolio .]. 
+	^allRootPortfolio! !
+!FinancialEntities methodsFor: 'father object for myself' stamp: 'psm 10/19/2023 20:26:57'!
+saveRootsTo: allRootPortfolio 
+
+	fatherPortfolio isEmpty 
+		ifTrue:[allRootPortfolio add: self]
+		ifFalse:[fatherPortfolio do:[:aFatherPortfolio|
+				aFatherPortfolio saveRootsTo: allRootPortfolio]].
+	
+
+	^allRootPortfolio! !
+
+!testRun: #PortfolioTests #test01_NewPortfolioHasNoBalance stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test16_PortfolioCantStoreHimself stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test22_PruebaDeFuego stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test23_PruebaDeMuchoFuego stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+!testRun: #PortfolioTests #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/19/2023 20:27:06'!
+PASSED!
+
+----SNAPSHOT----(19 October 2023 20:27:17) CuisUniversity-5981.image priorSource: 13516426!
