@@ -82186,3 +82186,223 @@ PASSED!
 Smalltalk renameClassNamed: #SetOfFinancialEntities as: #FinancialEntities!
 
 ----SNAPSHOT----(19 October 2023 19:55:48) CuisUniversity-5981.image priorSource: 13504316!
+!Portfolio methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:10:07' prior: 50703088 overrides: 50702685!
+transactions
+	"^ (storedFinancialEntities inject: OrderedCollection new into: [:aCollection :anAccount| aCollection , anAccount transactions.])."
+	
+	| transactions |
+	transactions := OrderedCollection new.! !
+!Portfolio methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:11:26' prior: 50753764 overrides: 50702685!
+transactions
+	"^ (storedFinancialEntities inject: OrderedCollection new into: [:aCollection :anAccount| aCollection , anAccount transactions.])."
+	
+	| transactions |
+	transactions := OrderedCollection new.
+	
+	storedFinancialEntities do:[:aFinancialEntity | aFinancialEntity addTransactionsTo: transactions ].
+	
+	^transactions ! !
+!Portfolio methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:12:14'!
+addTransactionsTo: transactions 
+
+	transactions addAll: storedFinancialEntities .
+	
+	^transactions ! !
+!FinancialEntities methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:12:22'!
+addTransactionsTo: transactions
+
+	self subclassResponsibility! !
+!FinancialEntities methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:13:48' prior: 50753793!
+addTransactionsTo: transactionsToBeSaved
+
+	self subclassResponsibility! !
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:13:59' overrides: 50753799!
+addTransactionsTo: transactionsToBeSaved
+
+	self subclassResponsibility! !
+!FinancialEntities methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:13:59' prior: 50753799!
+addTransactionsTo: transactionsToBeSaved
+
+	self subclassResponsibility! !
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:14:29' prior: 50753805 overrides: 50753811!
+addTransactionsTo: transactionsToBeSaved
+
+	transactionsToBeSaved addAll: transactions .
+	
+	^transactionsToBeSaved ! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'psm 10/19/2023 20:14:31'!
+PASSED!
+
+!testRun: #PortfolioTests #test01_NewPortfolioHasNoBalance stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/19/2023 20:14:35'!
+FAILURE!
+
+!testRun: #PortfolioTests #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test16_PortfolioCantStoreHimself stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test22_PruebaDeFuego stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test23_PruebaDeMuchoFuego stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/19/2023 20:14:35'!
+PASSED!
+
+!testRun: #PortfolioTests #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/19/2023 20:14:35'!
+FAILURE!
+!Portfolio methodsFor: 'transactions' stamp: 'psm 10/19/2023 20:16:56' prior: 50753787 overrides: 50753811!
+addTransactionsTo: transactionsToBeSaved 
+
+	storedFinancialEntities do:[:aFinancialEntity | aFinancialEntity addTransactionsTo: transactionsToBeSaved ].
+	
+	^transactionsToBeSaved ! !
+
+!testRun: #PortfolioTests #test01_NewPortfolioHasNoBalance stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test02_PortfolioWithAccountHasCorrectBalance stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test03_PortfolioWithMultipleAccountsHasCorrectBalance stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test05_PortfolioWithPortfolioHasCorrectBalance stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test06_PortfolioWithNestedPortfoliosHasCorrectBalance stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test07_EmptyPortfolioHasNoTransactionsRegistered stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test08_PortfolioRegistersTransactionFromAddedAccount stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test09_PortfolioRegisteresTransactionFromNestedPortfolio stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test10_EmptyPortfolioHasNoTransactions stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test11_PortfolioHasTransactionsFromStoredAccount stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test12_PortfolioHasTransactionsFromStoredPortfolios stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test13_PortfolioWithAccountCannotStoreSameAccount stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test14_PortfolioCannotStoreAccountRegisteredInNestedPortfolio stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test15_PortfolioCantStorePortfolioWithSharedAccount stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test16_PortfolioCantStoreHimself stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test17_PortfolioCantStoreTheSamePortfolioTwice stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test18_PortfolioCantStoreANestedPortoflio stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test19_PortfolioCantStoreAPortfolioWithSharedNestedPortfolio stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test20_PortfolioCantStorePortfolioStoredInFather stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test21_PortfolioCantStorePortfolioStoredInFathers stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test22_PruebaDeFuego stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test23_PruebaDeMuchoFuego stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test24_PortfolioCantStoreReceptiveAccountTwiceInPortfolioTree stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+!testRun: #PortfolioTests #test25_PruebaDeFuego_ReceptiveAccount stamp: 'psm 10/19/2023 20:16:59'!
+PASSED!
+
+----SNAPSHOT----(19 October 2023 20:17:17) CuisUniversity-5981.image priorSource: 13507488!
